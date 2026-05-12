@@ -7,7 +7,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. CSS for Large, Centered, and High-Visibility Buttons
+# 2. CSS for standard box size with extra-large text
 st.markdown("""
     <style>
     /* Centering and sizing the Title */
@@ -19,13 +19,13 @@ st.markdown("""
         color: white;
     }
     
-    /* Making the button text significantly larger */
+    /* Reverting box size to original, but keeping font large */
     div.stButton > button {
         width: 100%;
-        height: 100px !important; /* Increased height for larger text */
-        font-size: 32px !important; /* Bumped font size to 32px */
+        height: 3em !important; /* Original height */
+        font-size: 32px !important; /* Extra-large text */
         font-weight: 700 !important;
-        border-radius: 12px;
+        border-radius: 8px;
         background-color: #262730;
         color: white;
         border: 1px solid #464b5d;
@@ -39,12 +39,11 @@ st.markdown("""
     div.stButton > button:hover {
         border-color: #FFFC00; /* Snapchat Yellow */
         color: #FFFC00;
-        transform: scale(1.01);
     }
 
-    /* Reduce vertical spacing between rows */
+    /* Adjusting container for better spacing */
     .element-container {
-        margin-bottom: -5px;
+        margin-bottom: 5px;
     }
     </style>
 """, unsafe_allow_html=True)
