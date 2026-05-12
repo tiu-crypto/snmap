@@ -1,42 +1,58 @@
 import streamlit as st
 
-# 1. Page Configuration for a high-end dashboard look
+# 1. Wide layout to utilize the full screen width
 st.set_page_config(
     layout="wide", 
-    page_title="SnapChat Place Page Videos",
+    page_title="SnapChat Place Videos",
     initial_sidebar_state="collapsed"
 )
 
-# 2. Visual Styling
+# 2. Advanced CSS for Large, Centered, and Symmetrical Buttons
 st.markdown("""
     <style>
-    .stButton>button {
+    /* Centering and sizing the Title */
+    .main-title {
+        text-align: center;
+        font-size: 48px !important;
+        font-weight: 700;
+        margin-bottom: 40px;
+        color: white;
+    }
+    
+    /* Making the buttons large, bold, and centered */
+    div.stButton > button {
         width: 100%;
-        border-radius: 5px;
-        height: 3em;
+        height: 75px !important; /* Increased height */
+        font-size: 22px !important; /* Larger text */
+        font-weight: 600 !important;
+        border-radius: 12px;
         background-color: #262730;
         color: white;
         border: 1px solid #464b5d;
         transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
-    .stButton>button:hover {
+
+    /* Highlight effect on hover */
+    div.stButton > button:hover {
         border-color: #FFFC00; /* Snapchat Yellow */
         color: #FFFC00;
+        transform: scale(1.02);
     }
-    .main-title {
-        text-align: center;
-        padding: 20px;
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+    /* Reduce vertical spacing between rows */
+    .element-container {
+        margin-bottom: -10px;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# 3. Header Section
-st.markdown("<h1 class='main-title'>📍 SnapChat Place Page Videos: Tampa Convention Center</h1>", unsafe_allow_html=True)
-st.markdown("---")
+# 3. Updated Title
+st.markdown("<h1 class='main-title'>📍 SnapChat Place Videos: Tampa Convention Center</h1>", unsafe_allow_html=True)
 
-# 4. Data Organization
-# I've grouped these to keep the grid balanced
+# 4. Links Data
 places = [
     {"name": "Main Hall (Primary)", "url": "https://www.snapchat.com/place/tampa-convention-center/5b7693b0-9993-11e8-a4fc-8f3710c4f516"},
     {"name": "Main Hall (Alt 1)", "url": "https://www.snapchat.com/place/tampa-convention-center/4c721098-9992-11e8-a3c7-3f18e2fcbcb0"},
@@ -50,18 +66,18 @@ places = [
     {"name": "Franklin St. Loading Dock", "url": "https://www.snapchat.com/place/tampa-convention-center-franklin-st.-loading-dock/9d646f75-7179-4ed6-bed7-34d86a012238"}
 ]
 
-# 5. Build the Grid
-# Using 2 columns for a clean, balanced look
-cols = st.columns(2)
+# 5. Optimized Layout Grid
+# We use st.columns with a large gap and 'use_container_width' to fill the screen
+col1, col2 = st.columns(2, gap="large")
 
 for i, place in enumerate(places):
-    col_idx = i % 2
-    with cols[col_idx]:
-        if st.button(f"🎥 {place['name']}", key=f"btn_{i}"):
-            # JavaScript to open in new tab
+    target_col = col1 if i % 2 == 0 else col2
+    with target_col:
+        # 'use_container_width=True' ensures the button stretches to the full column width
+        if st.button(f"🎥 {place['name']}", key=f"btn_{i}", use_container_width=True):
             js = f"window.open('{place['url']}', '_blank').focus();"
             st.components.v1.html(f"<script>{js}</script>", height=0)
 
-# 6. Footer Info
-st.markdown("---")
-st.caption("Monitoring Note: If a page appears empty, there are currently no active public stories for that specific pinpoint. Check the 'Main Hall' links for general area activity.")
+# 6. Minimalist Footer
+st.markdown("<br><hr>", unsafe_allow_html=True)
+st.caption("RTCC Monitor: These links open direct public story feeds. Use the Device Toolbar in the new tab for mobile optimization.")
