@@ -1,45 +1,49 @@
 import streamlit as st
 
-# 1. Page Configuration
-st.set_config(
+# 1. Page Configuration (Fixed the function name)
+st.set_page_config(
     layout="wide", 
     page_title="SnapChat Place Videos",
     initial_sidebar_state="collapsed"
 )
 
-# 2. CSS for 90% Width, Adjusted Sizing for No-Scroll, and Centering
+# 2. CSS for 90% Width and Ultra-Compact Sizing
 st.markdown("""
     <style>
+    /* Constrain the main container to 90% and center it */
     .block-container {
         max-width: 90% !important;
-        padding-top: 1rem;
-        padding-bottom: 0rem;
+        padding-top: 0.5rem !important;
+        padding-bottom: 0rem !important;
         margin: auto;
     }
 
+    /* Smaller Title to save vertical space */
     .main-title {
         text-align: center;
-        font-size: 42px !important;
+        font-size: 32px !important;
         font-weight: 700;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         color: white;
     }
 
+    /* Compact Section Headers */
     .section-header {
         text-align: center;
-        font-size: 28px !important;
+        font-size: 22px !important;
         font-weight: 600;
-        margin-top: 10px;
-        margin-bottom: 10px;
+        margin-top: 5px;
+        margin-bottom: 5px;
         color: #FFFC00;
     }
     
+    /* Button height and font adjusted for no-scroll layout */
     div.stButton > button {
         width: 100%;
-        height: 1.4em !important; 
-        font-size: 26px !important; 
+        height: 1.2em !important; 
+        font-size: 22px !important; 
         font-weight: 700 !important;
-        border-radius: 8px;
+        border-radius: 6px;
         background-color: #262730;
         color: white;
         border: 1px solid #464b5d;
@@ -53,8 +57,13 @@ st.markdown("""
         color: #FFFC00;
     }
 
+    /* Minimal spacing between elements */
     .element-container {
-        margin-bottom: 5px;
+        margin-bottom: 2px !important;
+    }
+    
+    hr {
+        margin: 0.5em 0px !important;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -76,7 +85,7 @@ places_cc = [
     {"name": "Franklin St. Loading Dock", "url": "https://www.snapchat.com/place/tampa-convention-center-franklin-st.-loading-dock/9d646f75-7179-4ed6-bed7-34d86a012238"}
 ]
 
-col1, col2 = st.columns(2, gap="medium")
+col1, col2 = st.columns(2, gap="small")
 for i, place in enumerate(places_cc):
     target_col = col1 if i % 2 == 0 else col2
     with target_col:
@@ -101,7 +110,7 @@ places_ext = [
     {"name": "Tampa Bay Boating Adv.", "url": "https://www.snapchat.com/place/tampa-bay-boating-adventures/7108a34e-4b45-4b3e-adef-c8afe9338b20"}
 ]
 
-col3, col4 = st.columns(2, gap="medium")
+col3, col4 = st.columns(2, gap="small")
 for i, place in enumerate(places_ext):
     target_col = col3 if i % 2 == 0 else col4
     with target_col:
