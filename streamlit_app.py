@@ -1,6 +1,6 @@
 import streamlit as st
 
-# 1. Page Configuration (Fixed the function name)
+# 1. Page Configuration
 st.set_page_config(
     layout="wide", 
     page_title="SnapChat Place Videos",
@@ -18,7 +18,7 @@ st.markdown("""
         margin: auto;
     }
 
-    /* Smaller Title to save vertical space */
+    /* Main Title */
     .main-title {
         text-align: center;
         font-size: 32px !important;
@@ -27,7 +27,7 @@ st.markdown("""
         color: white;
     }
 
-    /* Compact Section Headers */
+    /* Section Headers (Uniform Size) */
     .section-header {
         text-align: center;
         font-size: 22px !important;
@@ -37,7 +37,7 @@ st.markdown("""
         color: #FFFC00;
     }
     
-    /* Button height and font adjusted for no-scroll layout */
+    /* Button styling */
     div.stButton > button {
         width: 100%;
         height: 1.2em !important; 
@@ -68,8 +68,9 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 3. Updated Title
+# 3. Main Title and First Section Title
 st.markdown("<h1 class='main-title'>📍 SnapChat Place Videos: Event Campus</h1>", unsafe_allow_html=True)
+st.markdown("<h2 class='section-header'>Tampa Convention Center</h2>", unsafe_allow_html=True)
 
 # 4. Section 1: Tampa Convention Center
 places_cc = [
@@ -93,9 +94,10 @@ for i, place in enumerate(places_cc):
             st.components.v1.html(f"<script>window.open('{place['url']}', '_blank').focus();</script>", height=0)
 
 st.markdown("---")
-st.markdown("<h2 class='section-header'>Additional Area Pages</h2>", unsafe_allow_html=True)
 
-# 5. Section 2: Davis Island / Aviation
+# 5. Section 2: Peter O. Knight Airport & Seaplane Basin
+st.markdown("<h2 class='section-header'>Peter O. Knight Airport & Seaplane Basin</h2>", unsafe_allow_html=True)
+
 places_ext = [
     {"name": "Davis Island Boat Ramp", "url": "https://www.snapchat.com/place/davis-island-boat-ramp/5f069be0-9a6c-11e8-82fb-d72269707099"},
     {"name": "Davis Island Dog Beach", "url": "https://www.snapchat.com/place/davis-island-dog-beach/beda1a40-9992-11e8-85c0-efbb0e9de6fb"},
@@ -117,6 +119,6 @@ for i, place in enumerate(places_ext):
         if st.button(f"🎥 {place['name']}", key=f"ext_{i}", use_container_width=True):
             st.components.v1.html(f"<script>window.open('{place['url']}', '_blank').focus();</script>", height=0)
 
-# 6. Reverted Original Footer
+# 6. Original Footer
 st.markdown("---")
 st.caption("Monitoring Note: If a page appears empty, there are currently no active public stories for that specific pinpoint. Check the 'Main Hall' links for general area activity.")
