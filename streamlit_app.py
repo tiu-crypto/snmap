@@ -7,7 +7,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. Advanced CSS for Large, Centered, and Symmetrical Buttons
+# 2. CSS for Large, Centered, and High-Visibility Buttons
 st.markdown("""
     <style>
     /* Centering and sizing the Title */
@@ -19,12 +19,12 @@ st.markdown("""
         color: white;
     }
     
-    /* Making the buttons large, bold, and centered */
+    /* Making the button text significantly larger */
     div.stButton > button {
         width: 100%;
-        height: 75px !important; /* Increased height */
-        font-size: 22px !important; /* Larger text */
-        font-weight: 600 !important;
+        height: 100px !important; /* Increased height for larger text */
+        font-size: 32px !important; /* Bumped font size to 32px */
+        font-weight: 700 !important;
         border-radius: 12px;
         background-color: #262730;
         color: white;
@@ -39,17 +39,17 @@ st.markdown("""
     div.stButton > button:hover {
         border-color: #FFFC00; /* Snapchat Yellow */
         color: #FFFC00;
-        transform: scale(1.02);
+        transform: scale(1.01);
     }
 
     /* Reduce vertical spacing between rows */
     .element-container {
-        margin-bottom: -10px;
+        margin-bottom: -5px;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# 3. Updated Title
+# 3. Title
 st.markdown("<h1 class='main-title'>📍 SnapChat Place Videos: Tampa Convention Center</h1>", unsafe_allow_html=True)
 
 # 4. Links Data
@@ -66,18 +66,15 @@ places = [
     {"name": "Franklin St. Loading Dock", "url": "https://www.snapchat.com/place/tampa-convention-center-franklin-st.-loading-dock/9d646f75-7179-4ed6-bed7-34d86a012238"}
 ]
 
-# 5. Optimized Layout Grid
-# We use st.columns with a large gap and 'use_container_width' to fill the screen
+# 5. Grid Layout
 col1, col2 = st.columns(2, gap="large")
 
 for i, place in enumerate(places):
     target_col = col1 if i % 2 == 0 else col2
     with target_col:
-        # 'use_container_width=True' ensures the button stretches to the full column width
         if st.button(f"🎥 {place['name']}", key=f"btn_{i}", use_container_width=True):
             js = f"window.open('{place['url']}', '_blank').focus();"
             st.components.v1.html(f"<script>{js}</script>", height=0)
 
-# 6. Minimalist Footer
 st.markdown("<br><hr>", unsafe_allow_html=True)
-st.caption("RTCC Monitor: These links open direct public story feeds. Use the Device Toolbar in the new tab for mobile optimization.")
+st.caption("RTCC Monitor: High-visibility place links for Tampa Convention Center.")
