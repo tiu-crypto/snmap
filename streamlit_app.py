@@ -1,36 +1,43 @@
 import streamlit as st
 
 # 1. Page Configuration
-st.set_page_config(
+st.set_config(
     layout="wide", 
     page_title="SnapChat Place Videos",
     initial_sidebar_state="collapsed"
 )
 
-# 2. CSS for 90% Width, Large Font, and Adjusted Box Height
+# 2. CSS for 90% Width, Adjusted Sizing for No-Scroll, and Centering
 st.markdown("""
     <style>
-    /* Constrain the main container to 90% and center it */
     .block-container {
         max-width: 90% !important;
-        padding-top: 2rem;
+        padding-top: 1rem;
+        padding-bottom: 0rem;
         margin: auto;
     }
 
-    /* Centering and sizing the Title */
     .main-title {
         text-align: center;
-        font-size: 48px !important;
+        font-size: 42px !important;
         font-weight: 700;
-        margin-bottom: 40px;
+        margin-bottom: 20px;
         color: white;
     }
+
+    .section-header {
+        text-align: center;
+        font-size: 28px !important;
+        font-weight: 600;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        color: #FFFC00;
+    }
     
-    /* Font size remains 44px, height reduced to 1.75em (half of previous 3.5em) */
     div.stButton > button {
         width: 100%;
-        height: 1.75em !important; 
-        font-size: 44px !important; 
+        height: 1.4em !important; 
+        font-size: 26px !important; 
         font-weight: 700 !important;
         border-radius: 8px;
         background-color: #262730;
@@ -46,18 +53,17 @@ st.markdown("""
         color: #FFFC00;
     }
 
-    /* Standardized row spacing */
     .element-container {
-        margin-bottom: 10px;
+        margin-bottom: 5px;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# 3. Title
-st.markdown("<h1 class='main-title'>📍 SnapChat Place Videos: Tampa Convention Center</h1>", unsafe_allow_html=True)
+# 3. Updated Title
+st.markdown("<h1 class='main-title'>📍 SnapChat Place Videos: Event Campus</h1>", unsafe_allow_html=True)
 
-# 4. Links Data
-places = [
+# 4. Section 1: Tampa Convention Center
+places_cc = [
     {"name": "Main Hall (Primary)", "url": "https://www.snapchat.com/place/tampa-convention-center/5b7693b0-9993-11e8-a4fc-8f3710c4f516"},
     {"name": "Main Hall (Alt 1)", "url": "https://www.snapchat.com/place/tampa-convention-center/4c721098-9992-11e8-a3c7-3f18e2fcbcb0"},
     {"name": "Main Hall (Alt 2)", "url": "https://www.snapchat.com/place/tampa-convention-center/cc1f253a-1dab-11ef-95b4-87d640dd6763"},
@@ -70,15 +76,37 @@ places = [
     {"name": "Franklin St. Loading Dock", "url": "https://www.snapchat.com/place/tampa-convention-center-franklin-st.-loading-dock/9d646f75-7179-4ed6-bed7-34d86a012238"}
 ]
 
-# 5. Grid Layout
-col1, col2 = st.columns(2, gap="large")
-
-for i, place in enumerate(places):
+col1, col2 = st.columns(2, gap="medium")
+for i, place in enumerate(places_cc):
     target_col = col1 if i % 2 == 0 else col2
     with target_col:
-        if st.button(f"🎥 {place['name']}", key=f"btn_{i}", use_container_width=True):
-            js = f"window.open('{place['url']}', '_blank').focus();"
-            st.components.v1.html(f"<script>{js}</script>", height=0)
+        if st.button(f"🎥 {place['name']}", key=f"cc_{i}", use_container_width=True):
+            st.components.v1.html(f"<script>window.open('{place['url']}', '_blank').focus();</script>", height=0)
+
+st.markdown("---")
+st.markdown("<h2 class='section-header'>Additional Area Pages</h2>", unsafe_allow_html=True)
+
+# 5. Section 2: Davis Island / Aviation
+places_ext = [
+    {"name": "Davis Island Boat Ramp", "url": "https://www.snapchat.com/place/davis-island-boat-ramp/5f069be0-9a6c-11e8-82fb-d72269707099"},
+    {"name": "Davis Island Dog Beach", "url": "https://www.snapchat.com/place/davis-island-dog-beach/beda1a40-9992-11e8-85c0-efbb0e9de6fb"},
+    {"name": "Davis Island Seaplane Basin", "url": "https://www.snapchat.com/place/davis-island-seaplane-basin/81856d74-9a6f-11e8-9fe2-0f545a5dee3b"},
+    {"name": "Davis Island (General)", "url": "https://www.snapchat.com/place/davis-island/64bdcec4-cf98-47d3-9f7b-1fd77fd5836a"},
+    {"name": "Seaplane Basin Park", "url": "https://www.snapchat.com/place/seaplane-basin-park/0ad6af44-67e6-4a62-b979-c596302dee0a"},
+    {"name": "Atlas Aviation Tampa", "url": "https://www.snapchat.com/place/atlas-aviation-tampa/00cb3728-9992-11e8-9e2e-7bb77402d9f3"},
+    {"name": "FlyVenture (Tampa)", "url": "https://www.snapchat.com/place/flyventure-(tampa)/66d7b1f4-bd98-11eb-88d9-63cdbc71d7ea"},
+    {"name": "Sarasota Avionics", "url": "https://www.snapchat.com/place/sarasota-avionics-%26-maintenance/9222fea8-2f38-46a4-a46e-2f48bd4107b4"},
+    {"name": "Vantage Aviation USA", "url": "https://www.snapchat.com/place/vantage-aviation-usa/4f32afbd-f74f-41b3-9856-85f0a75c613a"},
+    {"name": "Icon Aircraft Hangar", "url": "https://www.snapchat.com/place/icon-aircraft-maintenance-hanger/3e2871a6-f7ec-4b49-9694-060718175aaa"},
+    {"name": "Tampa Bay Boating Adv.", "url": "https://www.snapchat.com/place/tampa-bay-boating-adventures/7108a34e-4b45-4b3e-adef-c8afe9338b20"}
+]
+
+col3, col4 = st.columns(2, gap="medium")
+for i, place in enumerate(places_ext):
+    target_col = col3 if i % 2 == 0 else col4
+    with target_col:
+        if st.button(f"🎥 {place['name']}", key=f"ext_{i}", use_container_width=True):
+            st.components.v1.html(f"<script>window.open('{place['url']}', '_blank').focus();</script>", height=0)
 
 # 6. Reverted Original Footer
 st.markdown("---")
