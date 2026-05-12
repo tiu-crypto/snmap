@@ -1,10 +1,38 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
-st.title("Tampa Snap Map Monitor")
+st.set_page_config(layout="wide")
 
-# A big, clean button that opens the map in a mobile-optimized window
-if st.button("🚀 Launch Mobile Snap Map (Tampa)"):
-    js = "window.open('https://map.snapchat.com/@27.9417,-82.4567,15.00z', '_blank').focus();"
-    st.components.v1.html(f"<script>{js}</script>")
+# Tampa Convention Center
+snap_url = "https://map.snapchat.com/@27.9417,-82.4567,15.00z"
 
-st.info("Snapchat's security blocks direct embedding on many dashboards. Use the button above to open the live Tampa feed in a dedicated window.")
+# This script creates an iframe but 'spoofs' the navigator.userAgent
+# to make the site believe it is being viewed on an iPhone.
+components.html(
+    f"""
+    <div id="map-container" style="width:100%; height:90vh;">
+        <iframe 
+            id="snapMap"
+            src="{snap_url}" 
+            width="100%" 
+            height="100%" 
+            style="border:none;"
+            allow="geolocation">
+        </iframe>
+    </div>
+
+    <script>
+        const iframe = document.getElementById('snapMap');
+        
+        // We override the userAgent for the iframe's window
+        Object.defineProperty(iframe.contentWindow.navigator, 'userAgent', {{
+            get: function () {{ return 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1'; }},
+        }});
+        
+        Object.defineProperty(iframe.contentWindow.navigator, 'platform', {{
+            get: function () {{ return 'iPhone'; }},
+        }});
+    </script>
+    """,
+    height=850,
+)
