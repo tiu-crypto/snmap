@@ -7,7 +7,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. CSS for 90% Width, Large Font, and Centering
+# 2. CSS for 90% Width, Large Font, and Adjusted Box Height
 st.markdown("""
     <style>
     /* Constrain the main container to 90% and center it */
@@ -26,10 +26,10 @@ st.markdown("""
         color: white;
     }
     
-    /* Double the font size for the labels (approx 44px) */
+    /* Font size remains 44px, height reduced to 1.75em (half of previous 3.5em) */
     div.stButton > button {
         width: 100%;
-        height: 3.5em !important; 
+        height: 1.75em !important; 
         font-size: 44px !important; 
         font-weight: 700 !important;
         border-radius: 8px;
@@ -53,7 +53,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 3. Updated Title
+# 3. Title
 st.markdown("<h1 class='main-title'>📍 SnapChat Place Videos: Tampa Convention Center</h1>", unsafe_allow_html=True)
 
 # 4. Links Data
@@ -70,7 +70,7 @@ places = [
     {"name": "Franklin St. Loading Dock", "url": "https://www.snapchat.com/place/tampa-convention-center-franklin-st.-loading-dock/9d646f75-7179-4ed6-bed7-34d86a012238"}
 ]
 
-# 5. Centered Grid Layout
+# 5. Grid Layout
 col1, col2 = st.columns(2, gap="large")
 
 for i, place in enumerate(places):
