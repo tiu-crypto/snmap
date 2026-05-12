@@ -1,15 +1,22 @@
 import streamlit as st
 
-# 1. Wide layout to utilize the full screen width
+# 1. Page Configuration
 st.set_page_config(
     layout="wide", 
     page_title="SnapChat Place Videos",
     initial_sidebar_state="collapsed"
 )
 
-# 2. CSS for standard box size with extra-large text
+# 2. CSS for 90% Width, Large Font, and Centering
 st.markdown("""
     <style>
+    /* Constrain the main container to 90% and center it */
+    .block-container {
+        max-width: 90% !important;
+        padding-top: 2rem;
+        margin: auto;
+    }
+
     /* Centering and sizing the Title */
     .main-title {
         text-align: center;
@@ -19,36 +26,34 @@ st.markdown("""
         color: white;
     }
     
-    /* Reverting box size to original, but keeping font large */
+    /* Double the font size for the labels (approx 44px) */
     div.stButton > button {
         width: 100%;
-        height: 3em !important; /* Original height */
-        font-size: 32px !important; /* Extra-large text */
+        height: 3.5em !important; 
+        font-size: 44px !important; 
         font-weight: 700 !important;
         border-radius: 8px;
         background-color: #262730;
         color: white;
         border: 1px solid #464b5d;
-        transition: all 0.3s ease;
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
-    /* Highlight effect on hover */
     div.stButton > button:hover {
-        border-color: #FFFC00; /* Snapchat Yellow */
+        border-color: #FFFC00;
         color: #FFFC00;
     }
 
-    /* Adjusting container for better spacing */
+    /* Standardized row spacing */
     .element-container {
-        margin-bottom: 5px;
+        margin-bottom: 10px;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# 3. Title
+# 3. Updated Title
 st.markdown("<h1 class='main-title'>📍 SnapChat Place Videos: Tampa Convention Center</h1>", unsafe_allow_html=True)
 
 # 4. Links Data
@@ -65,7 +70,7 @@ places = [
     {"name": "Franklin St. Loading Dock", "url": "https://www.snapchat.com/place/tampa-convention-center-franklin-st.-loading-dock/9d646f75-7179-4ed6-bed7-34d86a012238"}
 ]
 
-# 5. Grid Layout
+# 5. Centered Grid Layout
 col1, col2 = st.columns(2, gap="large")
 
 for i, place in enumerate(places):
@@ -75,5 +80,6 @@ for i, place in enumerate(places):
             js = f"window.open('{place['url']}', '_blank').focus();"
             st.components.v1.html(f"<script>{js}</script>", height=0)
 
-st.markdown("<br><hr>", unsafe_allow_html=True)
-st.caption("RTCC Monitor: High-visibility place links for Tampa Convention Center.")
+# 6. Reverted Original Footer
+st.markdown("---")
+st.caption("Monitoring Note: If a page appears empty, there are currently no active public stories for that specific pinpoint. Check the 'Main Hall' links for general area activity.")
