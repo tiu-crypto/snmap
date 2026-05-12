@@ -1,21 +1,34 @@
 import streamlit as st
 
-st.set_page_config(layout="wide")
+st.set_page_config(layout="wide", page_title="Tampa Snap Map")
 
-# This is the Tampa Convention Center area
+# 1. The Tampa coordinates
 lat, lon, zoom = 27.9417, -82.4567, 15
 
-# We use a 'Proxy' URL to bypass the "Refused to Connect" block
-# This tells the browser to ignore the 'SameOrigin' security rule
-proxy_url = f"https://map.snapchat.com/@{lat},{lon},{zoom}z"
+# 2. The Direct URL
+target_url = f"https://map.snapchat.com/@{lat},{lon},{zoom}z"
+
+# 3. The Proxy (This is the secret sauce)
+# We use 'allorigins' to pull the site content through a different environment
+# This prevents the "Refused to Connect" error by stripping the security headers
+proxy_url = f"https://api.allorigins.win/raw?url={target_url}"
 
 st.markdown(
     f"""
-    <iframe 
-        src="{proxy_url}" 
-        style="width:100%; height:90vh; border:none;" 
-        allow="geolocation">
-    </iframe>
-    """, 
+    <style>
+        .reportview-container .main .block-container {{
+            padding-top: 0rem;
+            padding-bottom: 0rem;
+            padding-left: 0rem;
+            padding-right: 0rem;
+        }}
+        iframe {{
+            width: 100%;
+            height: 95vh;
+            border: none;
+        }}
+    </style>
+    <iframe src="{proxy_url}"></iframe>
+    """,
     unsafe_allow_html=True
 )
