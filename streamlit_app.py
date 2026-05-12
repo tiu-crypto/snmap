@@ -72,7 +72,7 @@ st.markdown("""
 st.markdown("<h1 class='main-title'>📍 SnapChat Place Videos: Event Campus</h1>", unsafe_allow_html=True)
 st.markdown("<h2 class='section-header'>Tampa Convention Center</h2>", unsafe_allow_html=True)
 
-# 4. Section 1: Tampa Convention Center
+# 4. Section 1: Tampa Convention Center (Updated with The Sail Pavilion)
 places_cc = [
     {"name": "Main Hall (Primary)", "url": "https://www.snapchat.com/place/tampa-convention-center/5b7693b0-9993-11e8-a4fc-8f3710c4f516"},
     {"name": "Main Hall (Alt 1)", "url": "https://www.snapchat.com/place/tampa-convention-center/4c721098-9992-11e8-a3c7-3f18e2fcbcb0"},
@@ -82,6 +82,7 @@ places_cc = [
     {"name": "Parking Garage (Secondary)", "url": "https://www.snapchat.com/place/tampa-convention-center-garage/727b08e5-b21c-4975-bd11-3e63af42a8f5"},
     {"name": "Visitor Drop-off Area", "url": "https://www.snapchat.com/place/tampa-convention-center-visitor-drop-off/bcba61f3-972b-4a2a-929f-7a0bfb3314a6"},
     {"name": "Convention Center Marina", "url": "https://www.snapchat.com/place/tampa-convention-center-marina/d24709af-589d-4240-989e-d974d9593675"},
+    {"name": "The Sail Pavilion", "url": "https://www.snapchat.com/place/the-sail-pavilion-on-the-riverwalk/d66288fe-9993-11e8-8c2b-2335bd18d40f"},
     {"name": "Channelside Loading Dock", "url": "https://www.snapchat.com/place/tampa-convention-center-channelside-dr.-loading-dock/cec03b11-4c7d-4b54-a18a-21842f6f0b65"},
     {"name": "Franklin St. Loading Dock", "url": "https://www.snapchat.com/place/tampa-convention-center-franklin-st.-loading-dock/9d646f75-7179-4ed6-bed7-34d86a012238"}
 ]
@@ -119,6 +120,30 @@ for i, place in enumerate(places_ext):
         if st.button(f"🎥 {place['name']}", key=f"ext_{i}", use_container_width=True):
             st.components.v1.html(f"<script>window.open('{place['url']}', '_blank').focus();</script>", height=0)
 
-# 6. Original Footer
+st.markdown("---")
+
+# 6. Section 3: Water Street, Cotanchobee Park, & Sparkman Wharf
+st.markdown("<h2 class='section-header'>Water Street, Cotanchobee Park, & Sparkman Wharf</h2>", unsafe_allow_html=True)
+
+places_ws = [
+    {"name": "Cotanchobee Fort Brooke Park", "url": "https://www.snapchat.com/place/cotanchobee-fort-brooke-park/408ab47e-9992-11e8-afac-2376f769c62d"},
+    {"name": "JW Marriott Water Street", "url": "https://www.snapchat.com/place/jw-marriott-tampa-water-street/42f023d6-1d92-11ef-a17e-7f8f25585157"},
+    {"name": "Marriott Water Street", "url": "https://www.snapchat.com/place/tampa-marriott-water-street/c2f63c12-2029-11e9-b9fb-271fb485407d"},
+    {"name": "Marriott Hotels & Resorts", "url": "https://www.snapchat.com/place/marriott-hotels-%26-resorts/d934a8b4-bbdd-11ef-b122-e32a2a342c6a"},
+    {"name": "Marriott Waterside & Marina", "url": "https://www.snapchat.com/place/tampa-marriott-waterside-hotel-%26-marina/72c1e73c-9992-11e8-8a5e-cb72ac8a6133"},
+    {"name": "Sparkman Wharf", "url": "https://www.snapchat.com/place/sparkman-wharf/89619c2c-1533-11e9-8210-6f805585d51d"},
+    {"name": "Heroes Plaza", "url": "https://www.snapchat.com/place/heroes-plaza/aaf3f230-dc5d-11ee-a543-f317ef59c082"},
+    {"name": "Anchor and Brine (Main)", "url": "https://www.snapchat.com/place/anchor-and-brine/626d4560-eab4-11e9-8f46-a3323cd413f3"},
+    {"name": "Anchor and Brine (Alt)", "url": "https://www.snapchat.com/place/anchor-and-brine/83fb1a46-62fe-11ea-8fb6-6bdfd9d4b8a3"}
+]
+
+col5, col6 = st.columns(2, gap="small")
+for i, place in enumerate(places_ws):
+    target_col = col5 if i % 2 == 0 else col6
+    with target_col:
+        if st.button(f"🎥 {place['name']}", key=f"ws_{i}", use_container_width=True):
+            st.components.v1.html(f"<script>window.open('{place['url']}', '_blank').focus();</script>", height=0)
+
+# 7. Original Footer
 st.markdown("---")
 st.caption("Monitoring Note: If a page appears empty, there are currently no active public stories for that specific pinpoint. Check the 'Main Hall' links for general area activity.")
